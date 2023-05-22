@@ -1,8 +1,8 @@
 import { Router } from "express";
 const routes = Router();
 
-import InitController from "./api/controller/init"
-routes.route("/init")
-    .get(InitController.init)
+import SubjectController from "./api/controller/Subject"
+routes.route("/subject")
+    .get(SubjectController.getAll)
 
 export default routes;
