@@ -1,0 +1,71 @@
+import { model, Schema } from 'mongoose';
+
+// MongoDB 
+const ActivitySchema = new Schema({
+    title: { type: String },
+    point: { type: Number },
+    mode: { type: String },
+    type: { type: String },
+    sendDate: { type: String },
+    endDate: { type: String },
+    status: { type: String },
+    link: { type: String }
+})
+const mongoModel = model("activity", ActivitySchema);
+
+class ActivityMongoModel {
+    // CRUD
+    async create(data: any) {
+        try {
+            return await mongoModel.create(data);
+        } catch (error: any) {
+            return {
+                error: error.message
+            }
+        }
+    }
+
+    async read(id: string) {
+        try {
+            return await mongoModel.findById(id);
+        } catch (error: any) {
+            return {
+                error: "Activity not found"
+            }
+        }
+    }
+
+    async readAll() {
+        try {
+            return await mongoModel.find();
+        } catch (error: any) {
+            return {
+                error: error.message
+            }
+        }
+    }
+
+    async update(id: string, data: any) {
+        try {
+            return await mongoModel.updateOne({ _id: id }, data);
+        } catch (error: any) {
+            return {
+                status: 500,
+                error: error.message
+            }
+        }
+    }
+
+    async delete(id: string) {
+        try {
+            return await mongoModel.deleteOne({ _id: id });
+        } catch (error: any) {
+            return {
+                status: 500,
+                error: error.message
+            }
+        }
+    }
+}
+
+export default new ActivityMongoModel();
