@@ -21,4 +21,10 @@ routes.route("/activity/:id")
     .patch(ActivityController.update)
     .delete(ActivityController.delete);
 
+import SubjectTable from "./api/controller/SubjectTable";
+routes.route("/subjectTable/act/:id")
+    .get(SubjectTable.get_activity)
+routes.route("/subjectTable/:id?")
+    .get(SubjectTable._init_)
+
 export default routes;

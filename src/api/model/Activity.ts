@@ -9,7 +9,8 @@ const ActivitySchema = new Schema({
     sendDate: { type: String },
     endDate: { type: String },
     status: { type: String },
-    link: { type: String }
+    link: { type: String },
+    _subject_id: { type: String }
 })
 const mongoModel = model("activity", ActivitySchema);
 
@@ -77,6 +78,23 @@ class ActivityMongoModel {
             return {
                 status: 500,
                 error: error.message
+            }
+        }
+    }
+
+    // Actions
+    async findBySubId(sub_id: string) {
+        try {
+            const data = await mongoModel.find({ _subject_id: sub_id });
+            if (data.length < 1) {
+                return {
+                    error: "Activities not found"
+                }
+            }
+            return data;
+        } catch (error) {
+            return {
+                error: "Activities not found"
             }
         }
     }
