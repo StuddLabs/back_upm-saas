@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const init_input_values_schema = z.object({
+export const subject_input_values_schema = z.object({
     title: z.string(),
     prefix: z.string(),
     percent: z.number(),
@@ -14,4 +14,4 @@ export const init_input_values_schema = z.object({
     avg_tests: z.number(),
     avg_total: z.number(),
 })
-export type init_input_values_type = z.infer<typeof init_input_values_schema>;
+export type subject_input_values_type = z.infer<typeof subject_input_values_schema>;

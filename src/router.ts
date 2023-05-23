@@ -2,8 +2,14 @@ import { Router } from "express";
 const routes = Router();
 
 import SubjectController from "./api/controller/Subject"
+// CRUD
 routes.route("/subject")
-    .get(SubjectController.getAll)
+    .post(SubjectController.create)
+    .get(SubjectController.readAll)
+routes.route("/subject/:id")
+    .get(SubjectController.read)
+    .patch(SubjectController.update)
+    .delete(SubjectController.delete);
 
 import ActivityController from "./api/controller/Activity"
 // CRUD

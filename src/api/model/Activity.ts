@@ -47,11 +47,19 @@ class ActivityMongoModel {
 
     async update(id: string, data: any) {
         try {
+            // check
+            const obj: any = await this.read(id)
+            if (obj.error) {
+                return {
+                    error: obj.error
+                }
+            }
+            // Act
             return await mongoModel.updateOne({ _id: id }, data);
         } catch (error: any) {
             return {
                 status: 500,
-                error: error.message
+                error: "Activity not found"
             }
         }
     }
