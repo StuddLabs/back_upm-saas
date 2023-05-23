@@ -33,7 +33,8 @@ routes.route("/menu")
     .get(Menu._init_)
 
 import SubjectStatistics from "./api/controller/SubjectStatistics";
-routes.route("/subjectStatistics")
+routes.route("/subjectStatistics/:id")
     .get(SubjectStatistics.get_subject)
+    .patch(SubjectStatistics.update_subject)
 
 export default routes;
