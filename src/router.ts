@@ -28,4 +28,8 @@ routes.route("/subjectTable/act/:id")
     .get(SubjectTable.get_activity)
     .patch(SubjectTable.update_activity)
 
+import Menu from "./api/controller/Menu";
+routes.route("/menu")
+    .get(Menu._init_)
+
 export default routes;

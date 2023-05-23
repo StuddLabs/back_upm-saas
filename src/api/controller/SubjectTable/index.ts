@@ -16,11 +16,12 @@ class SubjectTable {
             return res.status(404).json(acts.error);
         }
         return res.status(200).json({
+            id,
             title,
             prefix,
             acts: acts.map((el: any) => {
                 return {
-                    id: el._id,
+                    id: el.id,
                     title: el.title,
                     point: el.point,
                     status: el.status,
@@ -48,7 +49,6 @@ class SubjectTable {
         }
         req.body = act;
         return await Activity.update(req, res);
-        // return res.status(200).json(hasErrorSchema.data)
     }
 };
 
