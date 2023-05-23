@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, json } from "express";
+import Activity from "../Activity";
 import SubjectModel from "../../model/Subject"
 import ActivityModel from "../../model/Activity";
-import Activity from "../Activity";
+import { up_act_input_values_schema, up_act_input_values_type } from "./SubjectTableTypes";
 
 class SubjectTable {
     // Actions
@@ -30,7 +31,24 @@ class SubjectTable {
     }
 
     async get_activity(req: Request, res: Response) {
-        await Activity.read(req, res)
+        return await Activity.read(req, res)
+    }
+
+    async update_activity(req: Request, res: Response) {
+        // Check
+        const input_data: up_act_input_values_type = req.body;
+        const hasErrorSchema = up_act_input_values_schema.safeParse(input_data);
+        if (!hasErrorSchema.success) {
+            return res.status(500).json({ message: hasErrorSchema.error.errors });
+        };
+        // UP
+        let act: any = await ActivityModel.read(req.params.id)
+        for (const [key, value] of Object.entries(hasErrorSchema.data)) {
+            act[key] = value
+        }
+        req.body = act;
+        return await Activity.update(req, res);
+        // return res.status(200).json(hasErrorSchema.data)
     }
 };
 
