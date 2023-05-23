@@ -37,7 +37,13 @@ class ActivityMongoModel {
 
     async readAll() {
         try {
-            return await mongoModel.find();
+            const data = await mongoModel.find()
+            if (data.length < 1) {
+                return {
+                    error: "No Activities"
+                }
+            }
+            return data
         } catch (error: any) {
             return {
                 error: error.message
