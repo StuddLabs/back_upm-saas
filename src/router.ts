@@ -32,4 +32,8 @@ import Menu from "./api/controller/Menu";
 routes.route("/menu")
     .get(Menu._init_)
 
+import SubjectStatistics from "./api/controller/SubjectStatistics";
+routes.route("/subjectStatistics")
+    .get(SubjectStatistics.get_subject)
+
 export default routes;

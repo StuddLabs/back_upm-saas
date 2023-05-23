@@ -3,6 +3,7 @@ import Activity from "../Activity";
 import SubjectModel from "../../model/Subject"
 import ActivityModel from "../../model/Activity";
 import { up_act_input_values_schema, up_act_input_values_type } from "./SubjectTableTypes";
+import Subject from "../Subject";
 
 class SubjectTable {
     // Actions
@@ -34,7 +35,6 @@ class SubjectTable {
     async get_activity(req: Request, res: Response) {
         return await Activity.read(req, res)
     }
-
     async update_activity(req: Request, res: Response) {
         // Check
         const input_data: up_act_input_values_type = req.body;
