@@ -10,7 +10,7 @@ class SubjectTable {
     async _init_(req: Request, res: Response) {
         // get subject
         const data: any = await SubjectModel.readAll();
-        const { id, title, prefix } = data[0]
+        const { id, title, prefix } = req.params.id ? data.filter((el: any) => el.id === req.params.id)[0] : data[0];
         // // get activities
         const acts: any = await ActivityModel.findBySubId(req.params.id ? req.params.id : id)
         if (acts.error) {
